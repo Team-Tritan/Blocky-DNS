@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3.9"
 services:
   blocky:
     image: spx01/blocky
@@ -8,22 +8,20 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "4000:4000/tcp"
-    #environment:
-      #- TZ=Europe/Berlin # Optional to synchronize the log timestamp with host
     volumes:
-      - ./blocky/config.yaml:/app/config.yml
-      - ./blocky/blacklists:/app/blacklists/
-      - ./blocky/whitelists:/app/whitelists/
-      - ./blocky/logs:/app/logs/
+      - /home/sysop/dns/whitelists/:/app/whitelists/
+      - /home/sysop/dns/blacklists/:/app/blacklists/
+      - /home/sysop/dns/logs/:/app/logs/
+      - /home/sysop/dns/config.yml:/app/config.yml
   prometheus:
     image: prom/prometheus
     container_name: prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+     - '--config.file=/etc/prometheus/prometheus.yml'
     network_mode: host
     restart: unless-stopped
     volumes:
-      - ./blocky/prometheus/:/etc/prometheus/
+      - /home/sysop/dns/prometheus/:/etc/prometheus/:Z
       - prom_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -32,3 +30,4 @@ services:
       - '--web.console.templates=/usr/share/prometheus/consoles'
 volumes:
   prom_data:
+

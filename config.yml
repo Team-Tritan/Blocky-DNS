@@ -36,4 +36,4 @@ logLevel: debug
 logTimestamp: true
 queryLog:
   type: csv
-  target: ./logs
+  target: /app/logs
