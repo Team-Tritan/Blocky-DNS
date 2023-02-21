@@ -11,19 +11,19 @@ services:
     #environment:
       #- TZ=Europe/Berlin # Optional to synchronize the log timestamp with host
     volumes:
-      - ./config.yaml:/app/config.yml
-      - ./blacklists:/app/blacklists/
-      - ./whitelists:/app/whitelists/
+      - ./blocky/config.yaml:/app/config.yml
+      - ./blocky/blacklists:/app/blacklists/
+      - ./blocky/whitelists:/app/whitelists/
+      - ./blocky/logs:/app/logs/
   prometheus:
     image: prom/prometheus
     container_name: prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
-    ports:
-      - 9090:9090
+    network_mode: host
     restart: unless-stopped
     volumes:
-      - ./prometheus/:/etc/prometheus/
+      - ./blocky/prometheus/:/etc/prometheus/
       - prom_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'

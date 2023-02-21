@@ -6,7 +6,6 @@ upstream:
     - 4.2.2.4
     - 1.1.1.1
     - 1.0.0.1
-
 blocking:
   blackLists:
     abuse:
@@ -31,9 +30,10 @@ blocking:
       - tracking
 prometheus:
   enable: true
-
 port: 53
 httpPort: 4000
-
 logLevel: debug
 logTimestamp: true
+queryLog:
+  type: csv
+  target: ./logs
