@@ -1,0 +1,39 @@
+upstream:
+  default:
+    - 4.2.2.1
+    - 4.2.2.2
+    - 4.2.2.3
+    - 4.2.2.4
+    - 1.1.1.1
+    - 1.0.0.1
+
+blocking:
+  blackLists:
+    abuse:
+      - https://blocklistproject.github.io/Lists/abuse.txt
+    ads:
+      - https://blocklistproject.github.io/Lists/ads.txt
+    malware:
+      - https://blocklistproject.github.io/Lists/malware.txt
+    phishing:
+      - https://blocklistproject.github.io/Lists/phishing.txt
+    redirects:
+      - https://blocklistproject.github.io/Lists/redirect.txt
+    tracking:
+      - https://blocklistproject.github.io/Lists/tracking.txt
+  clientGroupsBlock:
+    default:
+      - abuse
+      - ads
+      - malware
+      - phishing
+      - redirects
+      - tracking
+prometheus:
+  enable: true
+
+port: 53
+httpPort: 4000
+
+logLevel: debug
+logTimestamp: true
